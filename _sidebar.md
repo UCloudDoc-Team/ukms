@@ -1,16 +1,15 @@
 # UCloud 密钥管理服务（UKMS）文档
 
-密钥管理服务（UKMS）是 UCloud 提供的云端密钥管理平台，基于硬件安全模块（HSM）保障密钥安全，帮助您集中管理加密密钥，构建数据加密、数字签名和消息验证等安全能力。
-
 ---
 
 ## 目录
 
 ### 概览
-- [产品介绍](overview/introduction.md)
-- [核心概念](overview/concepts.md)
-- [功能特性](overview/features.md)
-- [使用限制](overview/limits.md)
+- [产品简介](overview/introduction.md)
+- [基本概念](overview/concepts.md)
+- [产品优势](overview/features.md)
+- [应用场景](overview/应用场景.md)
+- [价格说明](overview/价格说明.md)
 
 ### 购买与计费
 - [计费说明](billing/billing.md)
@@ -43,26 +42,3 @@
 - [常见问题解答](faq/faq.md)
 
 ---
-
-## 功能特性概览
-
-| 功能 | 说明 |
-|------|------|
-| 实例管理 | 创建、升级、删除 UKMS 实例，管理密钥配额 |
-| 密钥管理 | 创建、禁用、启用、删除对称与非对称密钥 |
-| 加密/解密 | 使用 CMK 直接加密/解密最大 4KB 数据 |
-| 数字签名 | RSA/ECC 非对称密钥签名与验签 |
-| HMAC | 使用 HMAC 密钥生成和验证消息验证码 |
-| 数据密钥 | 生成数据密钥，实现信封加密 |
-| 密钥轮转 | 自动/手动轮转对称密钥（轮转周期 90–2560 天） |
-| 别名管理 | 为密钥创建易读别名，每个密钥最多 64 个别名 |
-| 令牌管理 | 为 UKMS 实例生成 JWT 访问令牌 |
-
----
-
-## 相关链接
-
-- [快速入门](guides/quickstart.md)
-- [核心概念](overview/concepts.md)
-- [API 参考](api/overview.md)
-- [常见问题](faq/faq.md)
