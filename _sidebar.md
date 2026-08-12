@@ -1,4 +1,3 @@
-# UCloud 密钥管理服务（UKMS）文档
 
 ---
 
@@ -11,8 +10,6 @@
 - [应用场景](overview/应用场景.md)
 - [价格说明](overview/价格说明.md)
 
-### 购买与计费
-- [计费说明](billing/billing.md)
 
 ### 使用指南
 - [快速入门](guides/quickstart.md)
