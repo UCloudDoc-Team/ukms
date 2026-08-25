@@ -134,7 +134,7 @@ POST /ukms/decrypt
 
 ## 下一步
 
-- 了解[信封加密](./data-key.md)模式，高效加密大量数据
-- 了解如何[管理密钥](./key-management.md)的完整生命周期
-- 了解[数字签名](./signing.md)操作
+- 了解[信封加密](/guides/data-key.md)模式，高效加密大量数据
+- 了解如何[管理密钥](/guides/key-management.md)的完整生命周期
+- 了解[数字签名](/guides/signing.md)操作
 - 查看完整的 [API 参考](../api/overview.md)
