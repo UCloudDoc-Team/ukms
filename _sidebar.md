@@ -23,19 +23,8 @@
 - [别名管理](/ukms/guides/alias-management.md)
 - [访问令牌管理](/ukms/guides/token-management.md)
 
-### API 参考
-- [API 概览](/ukms/api/overview.md)
-- [实例管理 API](/ukms/api/instance-api.md)
-- [密钥管理 API](/ukms/api/key-api.md)
-- [加解密 API](/ukms/api/crypto-api.md)
-- [签名验签 API](api/sign-api.md)
-- [HMAC API](api/hmac-api.md)
-- [数据密钥 API](api/data-key-api.md)
-- [密钥轮转 API](api/rotation-api.md)
-- [别名管理 API](api/alias-api.md)
-- [令牌管理 API](api/token-api.md)
 
 ### 常见问题
-- [常见问题解答](faq/faq.md)
+- [常见问题解答](/ukms/faq/faq.md)
 
 ---
