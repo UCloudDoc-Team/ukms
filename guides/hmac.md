@@ -38,7 +38,7 @@ POST /ukms/create_key
 |------|------|------|------|
 | ResourceId | string | 是 | UKMS 实例 ID |
 | KeyId | string | 是 | HMAC 密钥 ID 或别名 |
-| Message | string | 是 | 消息，Base64 编码 |
+| MacMessage | string | 是 | 消息，Base64 编码 |
 | MacAlgorithm | string | 是 | MAC 算法（须与密钥 KeySpec 匹配） |
 
 **MacAlgorithm 与 KeySpec 对应关系**
@@ -59,7 +59,7 @@ POST /ukms/generate_mac
   "Region": "cn-bj2",
   "ResourceId": "ukms-xxxxxxxx",
   "KeyId": "fd601a9a-c0c9-4dfb-a7ff-e5fd9f484ddc",
-  "Message": "dXNlcjppZD0xMjMmb3JkZXI9NDU2",
+  "MacMessage": "dXNlcjppZD0xMjMmb3JkZXI9NDU2",
   "MacAlgorithm": "HMAC_SHA_256"
 }
 ```
@@ -87,7 +87,7 @@ POST /ukms/generate_mac
 |------|------|------|------|
 | ResourceId | string | 是 | UKMS 实例 ID |
 | KeyId | string | 是 | HMAC 密钥 ID 或别名 |
-| Message | string | 是 | 原始消息，Base64 编码 |
+| MacMessage | string | 是 | 原始消息，Base64 编码 |
 | Mac | string | 是 | 待验证的 MAC 值，Base64 编码 |
 | MacAlgorithm | string | 是 | 生成 MAC 时使用的算法 |
 
@@ -101,7 +101,7 @@ POST /ukms/verify_mac
   "Region": "cn-bj2",
   "ResourceId": "ukms-xxxxxxxx",
   "KeyId": "fd601a9a-c0c9-4dfb-a7ff-e5fd9f484ddc",
-  "Message": "dXNlcjppZD0xMjMmb3JkZXI9NDU2",
+  "MacMessage": "dXNlcjppZD0xMjMmb3JkZXI9NDU2",
   "Mac": "k5V2xT8...",
   "MacAlgorithm": "HMAC_SHA_256"
 }

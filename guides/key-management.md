@@ -203,24 +203,6 @@ POST /ukms/enable_key
 }
 ```
 
-## 设置删除保护
-
-通过 `SetDeletionProtection` 接口开启或关闭密钥的删除保护。
-
-```json
-POST /ukms/set_deletion_protection
-
-{
-  "Action": "SetDeletionProtection",
-  "Region": "cn-bj2",
-  "ResourceId": "ukms-xxxxxxxx",
-  "KeyId": "fd601a9a-c0c9-4dfb-a7ff-e5fd9f484ddc",
-  "DeletionProtection": true
-}
-```
-
-**最佳实践**：对于重要的生产环境密钥，建议开启删除保护，防止误操作。
-
 ## 计划删除密钥
 
 密钥删除是一个两步操作，需先设置计划删除时间，到达时间后密钥才会被永久删除。
@@ -228,6 +210,16 @@ POST /ukms/set_deletion_protection
 ### 第一步：设置计划删除时间
 
 通过 `ScheduleKeyDeletion` 接口设置密钥的计划删除时间：
+
+**请求参数**
+
+| 参数 | 类型 | 必填 | 说明 |
+|------|------|------|------|
+| ResourceId | string | 是 | UKMS 实例 ID |
+| KeyId | string | 是 | 密钥 DB 数字 ID |
+| DeleteDay | int | 否 | 删除等待天数，取值范围 7~30 天，默认 30 天 |
+
+**请求示例**
 
 ```json
 POST /ukms/schedule_key_deletion
@@ -237,26 +229,25 @@ POST /ukms/schedule_key_deletion
   "Region": "cn-bj2",
   "ResourceId": "ukms-xxxxxxxx",
   "KeyId": "fd601a9a-c0c9-4dfb-a7ff-e5fd9f484ddc",
-  "PlanDeleteTime": 1755310800
+  "DeleteDay": 30
 }
 ```
 
 **约束条件**：
-- `PlanDeleteTime` 须大于当前时间
-- `PlanDeleteTime` 须不超过实例到期时间
+- `DeleteDay` 须在 7~30 天范围内
 - 已开启删除保护的密钥无法设置计划删除
 
 设置后密钥进入 `PendingDeletion` 状态，加密操作将被拒绝。
 
 ### 取消计划删除
 
-在计划时间到达前，可通过 `CancelUKmsScheduleKeyDeletion` 或 `CancelKeyDeletion` 取消删除计划：
+在计划时间到达前，可通过 `CancelKeyDeletion` 取消删除计划：
 
 ```json
-POST /ukms/cancel_u_kms_schedule_key_deletion
+POST /ukms/cancel_key_deletion
 
 {
-  "Action": "CancelUKmsScheduleKeyDeletion",
+  "Action": "CancelKeyDeletion",
   "Region": "cn-bj2",
   "ResourceId": "ukms-xxxxxxxx",
   "KeyId": "fd601a9a-c0c9-4dfb-a7ff-e5fd9f484ddc"
@@ -265,22 +256,7 @@ POST /ukms/cancel_u_kms_schedule_key_deletion
 
 ### 第二步：执行删除
 
-计划时间到达后（系统自动删除），或通过 `DeleteUKmsKey` 接口手动执行删除：
-
-```json
-POST /ukms/delete_u_kms_key
-
-{
-  "Action": "DeleteUKmsKey",
-  "Region": "cn-bj2",
-  "ResourceId": "ukms-xxxxxxxx",
-  "KeyId": "fd601a9a-c0c9-4dfb-a7ff-e5fd9f484ddc"
-}
-```
-
-**前提条件**：
-- 密钥必须已处于 `PendingDeletion` 状态（已设置 PlanDeleteTime）
-- 密钥未开启删除保护
+计划时间到达后系统自动删除。
 
 > **警告**：密钥一旦删除，使用该密钥加密的数据将永久无法解密。
 

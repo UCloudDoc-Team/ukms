@@ -1,4 +1,4 @@
-本文解释了密钥管理服务KMS（Key Management Service）的基本概念，帮助您正确理解和使用KMS。
+本文解释了密钥管理服务UKMS（UCloud Key Management Service）的基本概念，帮助您正确理解和使用KMS。
 
 ## **密钥服务（Key Service）**
 
@@ -19,7 +19,7 @@
 
 > **说明：**
 > 
-> 密钥管理系统（KMS）提供了对称加解密方案，详细请参见 [**对称加解密**](/guides/encryption.md)。
+> 密钥管理系统（KMS）提供了对称加解密方案，详细请参见 [**对称加解密**](../guides/encryption.md)。
 > 
 
 ## 非对称加解密
@@ -28,7 +28,7 @@
 
 > **说明：**
 > 
-> 密钥管理系统（KMS） 也提供了非对称加解密方案，详情请参见 [**非对称加解密**](/guides/encryption.md)。
+> 密钥管理系统（KMS） 也提供了非对称加解密方案，详情请参见 [**非对称加解密**](../guides/encryption.md)。
 > 
 
 
@@ -40,6 +40,26 @@
 
 信封加密场景中，DEK 用于直接加密解密用户数据，由密钥管理系统调用硬件密码机产生，并且被根密钥（CMK）加密后以密文及明文的形式返回给应用系统，业务侧通过在内存中的 DEK 明文进行本地高性能加解密。
 
+
+## 信封加密（Envelope Encryption）
+
+信封加密是一种两层加密架构：
+- **外层**：使用 UKMS CMK 加密数据密钥（DEK）
+- **内层**：使用数据密钥在本地加密实际业务数据
+
+这种模式的优点是大量数据在本地加密，无需通过网络传输到 KMS，同时 CMK 只用于保护数据密钥，密钥材料不离开 HSM。详情请参见 [**数据密钥**](../guides/data-key.md)。
+
+## 加密上下文（Encryption Context）
+
+加密上下文是一组键值对，作为附加认证数据（AAD）参与加密运算。加密时提供了 EncryptionContext，解密时**必须提供完全相同**的 EncryptionContext，否则解密失败。这可防止密文被挪用到其他业务场景。详情请参见 [**加密与解密**](../guides/encryption.md)。
+
+## 密钥轮转（Key Rotation）
+
+密钥轮转是通过定期更换密钥材料来限制单个密钥版本被破解后的影响范围的安全最佳实践。UKMS 支持自动轮转和按需手动轮转。轮转不改变 KeyId，旧版密钥材料仍被保留用于解密历史密文。详情请参见 [**密钥轮转**](../guides/key-rotation.md)。
+
+## BYOK（Bring Your Own Key）
+
+BYOK（自带密钥）允许用户将自有密钥材料导入 KMS 进行管理，实现密钥的自主可控。当前 UKMS 的 `Origin` 参数仅支持 `UCLOUD_KMS`，`EXTERNAL`（BYOK）为规划值。
 
 ## 敏感数据
 

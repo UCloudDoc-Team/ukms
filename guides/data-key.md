@@ -112,7 +112,7 @@ POST /ukms/generate_data_key_pair
 |------|------|
 | PrivateKeyPlaintext | 明文私钥（Base64 编码） |
 | PrivateKeyCiphertextBlob | 加密私钥（Base64 编码） |
-| PublicKey | 明文公钥（Base64 编码） |
+| DataPublicKey | 公钥（明文） |
 | KeyId | 保护私钥的 CMK ID |
 | KeyPairSpec | 密钥对规格 |
 
@@ -130,7 +130,7 @@ POST /ukms/generate_random
 }
 ```
 
-- `NumberOfBytes` 范围：1–1204 字节
+- `NumberOfBytes` 范围：1–1024 字节
 - 返回 Base64 编码的随机字节
 
 ## 信封加密完整示例

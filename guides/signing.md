@@ -41,7 +41,7 @@ UKMS 支持使用 RSA 或 ECC 非对称密钥对消息进行数字签名，并�
 |------|------|------|------|
 | ResourceId | string | 是 | UKMS 实例 ID |
 | KeyId | string | 是 | 非对称密钥 ID 或别名（KeyUsage 须含 SIGN_VERIFY） |
-| Message | string | 是 | 消息，Base64 编码，最大 4096 字节 |
+| SigningMessage | string | 是 | 待签名消息，Base64 编码，最大 4096 字节 |
 | MessageType | string | 否 | 消息类型：`RAW`（默认）或 `DIGEST` |
 | SigningAlgorithm | string | 是 | 签名算法，须与密钥 KeySpec 匹配 |
 
@@ -55,7 +55,7 @@ POST /ukms/sign
   "Region": "cn-bj2",
   "ResourceId": "ukms-xxxxxxxx",
   "KeyId": "fd601a9a-c0c9-4dfb-a7ff-e5fd9f484ddc",
-  "Message": "VGhpcyBpcyBhIG1lc3NhZ2U=",
+  "SigningMessage": "VGhpcyBpcyBhIG1lc3NhZ2U=",
   "MessageType": "RAW",
   "SigningAlgorithm": "RSASSA_PKCS1_V1_5_SHA_256"
 }
@@ -66,13 +66,13 @@ POST /ukms/sign
 ```json
 {
   "RetCode": 0,
-  "Signature": "MEYCIQDm...",
+  "SignatureResult": "MEYCIQDm...",
   "KeyId": "fd601a9a-c0c9-4dfb-a7ff-e5fd9f484ddc",
   "SigningAlgorithm": "RSASSA_PKCS1_V1_5_SHA_256"
 }
 ```
 
-`Signature` 为 Base64 编码的签名值。
+`SignatureResult` 为 Base64 编码的签名值。
 
 ## 验签（Verify）
 
@@ -82,9 +82,9 @@ POST /ukms/sign
 |------|------|------|------|
 | ResourceId | string | 是 | UKMS 实例 ID |
 | KeyId | string | 是 | 非对称密钥 ID 或别名 |
-| Message | string | 是 | 原始消息，Base64 编码 |
+| SigningMessage | string | 是 | 原始消息，Base64 编码 |
 | MessageType | string | 否 | 消息类型：`RAW`（默认）或 `DIGEST` |
-| Signature | string | 是 | 待验证的签名，Base64 编码 |
+| SignatureResult | string | 是 | 待验证的签名，Base64 编码 |
 | SigningAlgorithm | string | 是 | 签名时使用的算法 |
 
 **请求示例**
@@ -97,9 +97,9 @@ POST /ukms/verify
   "Region": "cn-bj2",
   "ResourceId": "ukms-xxxxxxxx",
   "KeyId": "fd601a9a-c0c9-4dfb-a7ff-e5fd9f484ddc",
-  "Message": "VGhpcyBpcyBhIG1lc3NhZ2U=",
+  "SigningMessage": "VGhpcyBpcyBhIG1lc3NhZ2U=",
   "MessageType": "RAW",
-  "Signature": "MEYCIQDm...",
+  "SignatureResult": "MEYCIQDm...",
   "SigningAlgorithm": "RSASSA_PKCS1_V1_5_SHA_256"
 }
 ```
@@ -164,4 +164,4 @@ POST /ukms/get_public_key
 |------|------|---------|
 | 密钥非非对称密钥 | 使用了对称密钥调用 Sign | 请使用 RSA 或 ECC 类型密钥 |
 | 签名算法与密钥不匹配 | 如用 ECDSA_SHA_256 搭配 RSA_2048 | 参考算法-密钥对照表选择正确算法 |
-| 消息过长 | Message 超过 4096 字节 | 使用 `DIGEST` 类型，传入消息摘要 |
+| 消息过长 | SigningMessage 超过 4096 字节 | 使用 `DIGEST` 类型，传入消息摘要 |

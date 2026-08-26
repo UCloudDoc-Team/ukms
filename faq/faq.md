@@ -28,7 +28,7 @@ UKMS 基于 HSM（硬件安全模块）保护密钥材料，密钥永远不会�
 
 **不能**。密钥一旦删除，密钥材料将被彻底销毁，无法恢复。之前使用该密钥加密的数据将永久无法解密。建议在删除前：
 1. 确认所有依赖该密钥的数据已完成迁移或不再需要解密
-2. 使用 `SetDeletionProtection` 开启保护防止误删
+2. 使用 `ScheduleKeyDeletion` 设置删除等待期（7~30 天），避免立即误删
 3. 使用 `ScheduleKeyDeletion` + 等待期进行两步删除
 
 ---
@@ -49,8 +49,8 @@ RSA 算法本身同时支持加解密和签名验签，因此 UKMS 的 RSA 密�
 
 当调用 `ScheduleKeyDeletion` 后，密钥进入 `PendingDeletion` 状态。在等待期（最短 7 天，最长 30 天）内：
 - 密钥不可用于任何加密操作
-- 可通过 `CancelUKmsScheduleKeyDeletion` 取消删除计划，密钥恢复 `Enabled` 状态
-- 等待期结束后密钥自动删除（或调用 `DeleteUKmsKey` 立即删除）
+- 可通过 `CancelKeyDeletion` 取消删除计划，密钥恢复 `Enabled` 状态
+- 等待期结束后密钥自动删除
 
 ---
 

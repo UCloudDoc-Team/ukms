@@ -128,22 +128,6 @@ POST /ukms/decrypt
 
 `Plaintext` 为 Base64 编码的解密结果，请在应用层进行 Base64 解码以得到原始数据。
 
-## 重加密（ReEncrypt）
-
-将一个 CMK 保护下的密文，重新加密为另一个 CMK 的密文，而无需先解密。这在密钥迁移场景中非常有用。
-
-```json
-POST /ukms/re_encrypt
-
-{
-  "Action": "ReEncrypt",
-  "Region": "cn-bj2",
-  "ResourceId": "ukms-xxxxxxxx",
-  "CiphertextBlob": "AQICAHg5z...",
-  "DestinationKeyId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
-}
-```
-
 ## 加密上下文
 
 加密上下文（Encryption Context）是一组键值对，作为附加认证数据（AAD）参与加密运算。
