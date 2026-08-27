@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UKMS - UCloud 密钥管理系统</title>
+  <meta name="description" content="UCloud 密钥管理系统（UKMS）提供安全、可靠的密钥管理服务">
+
+  <!-- Theme: Defaults for light/dark -->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/themes/vue.css" media="light">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/themes/dark.css" media="(prefers-color-scheme: dark)">
+
+  <style>
+    :root {
+      --theme-color: #409eff;
+      --base-color: #333;
+      --base-background-color: #fff;
+    }
+
+    :root:not([data-theme="light"]) {
+      --theme-color: #66b1ff;
+      --base-color: #ccc;
+      --base-background-color: #222;
+    }
+
+    :root[data-theme="light"] {
+      --theme-color: #409eff;
+      --base-color: #333;
+      --base-background-color: #fff;
+    }
+
+    .sidebar-nav > ul > li:first-child {
+      font-weight: bold;
+      margin-top: 1rem;
+    }
+
+    .app-name img {
+      max-height: 40px;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">加载中...</div>
+
+  <script>
+    window.$docsify = {
+      name: 'UKMS 文档',
+      logo: '',
+      repo: '',
+
+      // Load sidebar
+      loadSidebar: true,
+
+      // Load README.md as home
+      loadNavbar: false,
+
+      // Default home page
+      homepage: 'README.md',
+
+      // Enable hash routing
+      routerMode: 'hash',
+
+      // Auto generate table of contents
+      auto2top: true,
+
+      // Max level of table of contents
+      subMaxLevel: 2,
+
+      // Enable emoji support
+      emoji: {
+        search: 'shortcut',
+        emojis: {
+          'ukms': 'https://emoji.js.org/assets/ukms.png'
+        }
+      },
+
+      // Search plugin
+      search: {
+        maxAge: 86400,
+        placeholder: '搜索文档...',
+        noData: '未找到结果',
+        depth: 4
+      },
+
+      // Pagination
+      pagination: {
+        previousText: '上一篇',
+        nextText: '下一篇',
+        crossChapter: true
+      }
+    }
+  </script>
+
+  <!-- Docsify core -->
+  <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/docsify.min.js"></script>
+
+  <!-- Search plugin -->
+  <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/plugins/search.min.js"></script>
+
+  <!-- Emoji plugin -->
+  <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/plugins/emoji.min.js"></script>
+
+  <!-- External script plugin (for non-CDN scripts) -->
+  <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/plugins/external-script.min.js"></script>
+
+  <!-- Zoom image plugin -->
+  <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/plugins/zoom-image.min.js"></script>
+
+  <!-- Copy code plugin -->
+  <script src="//cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>
+</body>
+</html>
