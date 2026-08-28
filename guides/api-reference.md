@@ -191,7 +191,7 @@
 
 ### Decrypt — 解密
 
-解密使用对称或非对称 KMS 密钥加密的密文。非对称密钥解密时须指定 KeyId 和 EncryptionAlgorithm。
+解密使用对称或非对称 UUKMS 密钥加密的密文。非对称密钥解密时须指定 KeyId 和 EncryptionAlgorithm。
 
 **请求参数**
 
@@ -278,7 +278,7 @@
 
 | 字段名 | 类型 | 说明 |
 |:---|:---|:---|
-| KeyId | string | 用于加密私钥的 KMS 密钥 |
+| KeyId | string | 用于加密私钥的 UKMS 密钥 |
 | KeyPairSpec | string | 生成的数据密钥对类型 |
 | PrivateKeyCiphertextBlob | string | 私钥的加密副本 |
 | PrivateKeyPlaintext | string | 私钥的明文副本 |

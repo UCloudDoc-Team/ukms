@@ -1,3 +1,20 @@
+# UCloud 密钥管理服务（UKMS）
+
+UCloud 密钥管理服务（UKMS，UCloud Key Management Service）是一项托管式密钥管理服务，让您可以轻松创建和管理加密密钥，控制密钥在各种云服务和应用程序中的使用。
+
+UKMS 使用第三方认证的硬件安全模块 HSM（Hardware Security Module）来生成和保护密钥，满足用户多应用多业务的密钥管理需求，助力用户落实合规要求。
+
+## 快速入口
+
+| 功能 | 描述 |
+|------|------|
+| [快速入门](guides/quickstart.md) | 开始使用 UKMS，完成第一次加密操作 |
+| [信封加密](guides/data-key.md) | 高效加密大量数据的最佳实践 |
+| [密钥管理](guides/key-management.md) | 创建、启用、禁用、删除密钥的完整指南 |
+| [API 参考](https://docs.ucloud.cn/api/ukms-api/) | 完整的 API 接口文档 |
+
+---
+
 ## 目录
 
 ### 概览
@@ -26,5 +43,3 @@
 
 ### 常见问题
 - [常见问题解答](faq/faq.md)
-
----

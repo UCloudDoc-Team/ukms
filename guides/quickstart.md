@@ -4,9 +4,13 @@
 
 ## 步骤一：购买 UKMS 实例
 
-在控制台中 [购买UKMS实例](https://console.ucloud.cn/ukms/manage):
-![购买KMS实例](../images/createkms.png)
+### 方式一：控制台购买
 
+访问 [UKMS 控制台](https://console.ucloud.cn/ukms/manage) 创建实例：
+
+![购买 UKMS 实例](../images/createkms.png)
+
+### 方式二：API 创建
 
 通过 API 调用创建实例：
 
@@ -37,7 +41,9 @@ POST /ukms/create_u_kms_instance
 }
 ```
 
-记下返回的 `ResourceId`，后续所有操作都需要它。
+> **重要**：记下返回的 `ResourceId`，后续所有操作都需要它。
+
+---
 
 ## 步骤二：创建对称加密密钥
 
@@ -73,6 +79,10 @@ POST /ukms/create_key
 }
 ```
 
+> **提示**：`KeyId` 是密钥的唯一标识符，后续加密解密操作需要使用它。
+
+---
+
 ## 步骤三：加密数据
 
 将要加密的数据进行 Base64 编码后，传入 Encrypt 接口：
@@ -89,7 +99,7 @@ POST /ukms/encrypt
 }
 ```
 
-> 注意：`Plaintext` 为 Base64 编码的原始数据（上例为 "Hello World" 的 Base64 编码），最大 4KB。
+> **注意**：`Plaintext` 为 Base64 编码的原始数据（上例为 "Hello World" 的 Base64 编码），最大 4KB。超过 4KB 的数据请使用 [信封加密](data-key.md) 模式。
 
 **响应示例**
 
@@ -101,6 +111,8 @@ POST /ukms/encrypt
   "EncryptionAlgorithm": "SYMMETRIC_DEFAULT"
 }
 ```
+
+---
 
 ## 步骤四：解密数据
 
@@ -115,7 +127,7 @@ POST /ukms/decrypt
 }
 ```
 
-> 注意：对称密钥解密时 KeyId 可以省略，系统会从密文中自动识别。
+> **注意**：对称密钥解密时 `KeyId` 可以省略，系统会从密文中自动识别。
 
 **响应示例**
 
@@ -128,13 +140,15 @@ POST /ukms/decrypt
 }
 ```
 
-`Plaintext` 为 Base64 编码的解密结果，解码后即为原始数据。
+> `Plaintext` 为 Base64 编码的解密结果，需要在应用层进行 Base64 解码得到原始数据。
 
 ---
 
 ## 下一步
 
-- 了解[信封加密](data-key.md)模式，高效加密大量数据
-- 了解如何[管理密钥](key-management.md)的完整生命周期
-- 了解[数字签名](signing.md)操作
-- 查看完整的 [API 参考](https://docs.ucloud.cn/api/ukms-api/)
+| 主题 | 描述 |
+|------|------|
+| [信封加密](data-key.md) | 高效加密大量数据的最佳实践 |
+| [密钥管理](key-management.md) | 创建、启用、禁用、删除密钥的完整指南 |
+| [数字签名](signing.md) | 使用非对称密钥进行签名和验签 |
+| [API 参考](https://docs.ucloud.cn/api/ukms-api/) | 完整的 API 接口文档 |
