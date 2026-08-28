@@ -26,7 +26,7 @@ POST /ukms/create_u_kms_instance
   "Quantity": 1,
   "KeyQuota": 100,
   "Name": "my-kms-instance",
-  "Type": "software"
+  "Type": "hardware"
 }
 ```
 

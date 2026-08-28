@@ -12,7 +12,6 @@ UKMS 实例是您使用密钥管理服务的基础单位，提供独立的密钥
 |------|------|------|------|
 | ChargeType | string | 是 | 计费类型：`Month`（按月）或 `Year`（按年） |
 | Quantity | int | 是 | 购买数量（月数或年数） |
-| KeyQuota | int | 是 | 密钥配额，范围 100–999,999,990，须为 10 的倍数 |
 | Name | string | 否 | 实例名称 |
 | Tag | string | 否 | 业务组标签 |
 | Type | string | 是 | 实例类型：`software` 或 `hardware` |
