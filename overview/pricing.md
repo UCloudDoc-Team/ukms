@@ -10,7 +10,7 @@ UKMS 采用**预付费**模式，购买时需选择计费周期和密钥配额�
 | `Year`（按年） | 购买指定年数的使用权限，通常享有折扣 |
 
 ## 实例规格
-专业版为包年包月付费模式，是物理密码机集群模式的云上密钥管理服务，提供了密钥创建、启用、禁用等生命周期管理，支持与UCloud 云产品无缝集成，实现透明加密。专业版支持1,000 个根密钥（CMK）、5 个数据密钥（DEK），具体计费详情如下：
+专业版为包年包月付费模式，是物理密码机集群模式的云上密钥管理服务，提供了密钥创建、启用、禁用等生命周期管理，支持与UCloud 云产品无缝集成，实现透明加密。专业版支持1,000 个根密钥（CMK），具体计费详情如下：
 <table>
 <tr>
 <td rowspan="1" colspan="1" >规格名称</td>
@@ -25,7 +25,7 @@ UKMS 采用**预付费**模式，购买时需选择计费周期和密钥配额�
 <tr>
 <td rowspan="1" colspan="1" >专业版</td>
 
-<td rowspan="1" colspan="1" >支持管理1,000个 CMK、5个 DEK</td>
+<td rowspan="1" colspan="1" >支持管理1,000个 CMK</td>
 
 <td rowspan="1" colspan="1" >7,699 元</td>
 
@@ -33,19 +33,26 @@ UKMS 采用**预付费**模式，购买时需选择计费周期和密钥配额�
 </tr>
 
 <tr>
-<td rowspan="4" colspan="1" >DEK 扩展包</td>
+<td rowspan="4" colspan="1" >API QPS限制</td>
 
-<td rowspan="1" colspan="1" >10个起售</td>
+<td rowspan="1" colspan="1" >Encrypt：300次/秒</td>
 
-<td rowspan="1" colspan="1" >2.49 元/个</td>
+<td rowspan="1" colspan="1" >Decrypt：对称300次/秒，非对称200次/秒</td>
 
-<td rowspan="1" colspan="1" >月</td>
+<td rowspan="1" colspan="1" >Sign：200次/秒</td>
+
+<td rowspan="1" colspan="1" >Verify：200次/秒</td>
+
+<td rowspan="1" colspan="1" >GetPublicKey：300次/秒</td>
+
+<td rowspan="1" colspan="1" >GenerateRandom：300次/秒</td>
+
 </tr>
 
 </table>
 
 
-> 增加DEK，请通过[联系我们](https://spt.ucloud.cn/)开通购买。
+> 扩展API QPS性能，请通过[联系我们](https://spt.ucloud.cn/)咨询。
 
 ## 软件实例与硬件实例
 
