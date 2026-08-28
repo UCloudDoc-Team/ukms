@@ -148,7 +148,7 @@ POST /ukms/decrypt
 
 | 主题 | 描述 |
 |------|------|
-| [信封加密](data-key.md) | 高效加密大量数据的最佳实践 |
-| [密钥管理](key-management.md) | 创建、启用、禁用、删除密钥的完整指南 |
-| [数字签名](signing.md) | 使用非对称密钥进行签名和验签 |
+| [信封加密](/ukms/guides/data-key.md) | 高效加密大量数据的最佳实践 |
+| [密钥管理](/ukms/guides/key-management.md) | 创建、启用、禁用、删除密钥的完整指南 |
+| [数字签名](/ukms/guides/signing.md) | 使用非对称密钥进行签名和验签 |
 | [API 参考](https://docs.ucloud.cn/api/ukms-api/) | 完整的 API 接口文档 |

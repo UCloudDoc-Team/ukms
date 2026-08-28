@@ -18,7 +18,6 @@
 - [数据密钥](/ukms/guides/data-key.md)
 - [密钥轮转](/ukms/guides/key-rotation.md)
 - [别名管理](/ukms/guides/alias-management.md)
-- [访问令牌管理](/ukms/guides/token-management.md)
 
 
 ### API 参考

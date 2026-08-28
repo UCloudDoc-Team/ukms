@@ -134,8 +134,3 @@ POST /ukms/delete_u_kms_instance
 }
 ```
 
-## 为实例创建访问令牌
-
-UKMS 实例通过 JWT 令牌进行访问控制。请参阅[访问令牌管理](token-management.md)了解详情。
-
-![资源详情](../images/resource_detail.png)
