@@ -68,6 +68,8 @@
 | ResourceId | string | 密钥所属 UKMS 实例资源 ID |
 | Description | string | 密钥描述 |
 | DeletionDate | int | 计划删除时间（Unix 时间戳） |
+| Arn | string | 密钥资源 ARN |
+| OrganizationId | int | 密钥所属组织的数字 ID |
 
 ---
 
@@ -91,20 +93,21 @@
 
 | 字段名 | 类型 | 说明 |
 |:---|:---|:---|
-| KeyId | string | 主密钥 ID |
-| KeySpec | string | 密钥规格 |
-| KeyUsage | array[string] | 密钥用途 |
-| Origin | string | 密钥来源（ucloud/import） |
-| Status | string | 密钥状态（Active/Deactivated/PendingDeletion） |
-| CreatedTime | int | 创建时间（Unix 时间戳） |
-| UpdateTime | int | 更新时间（Unix 时间戳） |
-| KeyRotationEnabled | boolean | 是否已开启自动轮转 |
-| RotationPeriodInDays | int | 自动轮转周期（天），未开启时为 0 |
+| ProjectId | string | 密钥所属项目的对外别名，格式为 org-xxx |
+| KeyId | string | 对外主密钥 ID（ukms_key_info.key_id） |
+| KeySpec | string | 密钥规格。取值：SYMMETRIC_DEFAULT、RSA_2048、RSA_3072、RSA_4096、ECC_NIST_P256、ECC_NIST_P384、ECC_NIST_P521、HMAC_256、HMAC_384、HMAC_512 |
+| KeyUsage | array[string] | 按 KeySpec 派生的密钥用途。取值：ENCRYPT_DECRYPT、SIGN_VERIFY、GENERATE_VERIFY_MAC、KEY_AGREEMENT |
+| Origin | string | 密钥来源，由 Origin 派生。取值：UCLOUD_KMS、EXTERNAL |
+| Status | string | 数据库密钥状态。常见取值：Active、Deactivated、PendingDeletion |
+| CreatedTime | int | 创建时间，Unix 时间戳 |
+| UpdateTime | int | 更新时间，Unix 时间戳 |
+| KeyRotationEnabled | boolean | 是否已开启自动轮转；未配置或已关闭均为 false |
+| RotationPeriodInDays | int | 自动轮转周期（天）；未开启时为 0 |
+| ResourceId | string | 密钥所属的 UKMS 实例资源 ID |
 | Description | string | 密钥描述 |
-| DeletionDate | int | 计划删除时间（Unix 时间戳） |
-| NextRotationDate | int | 下次自动轮转时间（Unix 时间戳） |
-| ResourceId | string | 密钥所属 UKMS 实例资源 ID |
-| OrganizationId | int | 密钥所属组织的数字 ID |
+| PlanDeleteTime | int | 计划删除时间，Unix 时间戳 |
+| NextRotationDate | int | 下次自动轮转时间（Unix 时间戳，秒）；仅在已开启自动轮转时返回 |
+| OrganizationId | int | 密钥所属组织的数字 ID，来源于密钥关联的资源交易记录 |
 
 ---
 
@@ -114,7 +117,7 @@
 
 | 参数名 | 类型 | 必填 | 说明 |
 |:---|:---|:---|:---|
-| KeyId | string | **是** | 密钥 DB 数字 ID |
+| KeyId | string | **是** | 密钥资源长 ID、ARN 或别名 |
 | ResourceId | string | 否 | UKMS 实例资源 ID |
 
 ---
@@ -125,7 +128,7 @@
 
 | 参数名 | 类型 | 必填 | 说明 |
 |:---|:---|:---|:---|
-| KeyId | string | **是** | 密钥 DB 数字 ID |
+| KeyId | string | **是** | 密钥资源长 ID、ARN 或别名 |
 | ResourceId | string | 否 | UKMS 实例资源 ID |
 
 ---
@@ -134,7 +137,7 @@
 
 | 参数名 | 类型 | 必填 | 说明 |
 |:---|:---|:---|:---|
-| KeyId | string | **是** | 密钥资源长 ID、或别名 |
+| KeyId | string | **是** | 密钥资源长 ID、ARN 或别名 |
 | Description | string | **是** | 新的密钥描述，最多 8192 字符；空字符串表示清空描述 |
 | ResourceId | string | 否 | UKMS 实例资源 ID |
 
@@ -146,7 +149,7 @@
 
 | 参数名 | 类型 | 必填 | 说明 |
 |:---|:---|:---|:---|
-| KeyId | string | **是** | 密钥 DB 数字 ID |
+| KeyId | string | **是** | 密钥资源长 ID、ARN 或别名 |
 | DeleteDay | int | 否 | 删除等待天数，取值范围 7~30 天，默认 30 天 |
 | ResourceId | string | 否 | UKMS 实例资源 ID |
 
@@ -158,7 +161,7 @@
 
 | 参数名 | 类型 | 必填 | 说明 |
 |:---|:---|:---|:---|
-| KeyId | string | **是** | 密钥 ID |
+| KeyId | string | **是** | 密钥资源长 ID、ARN 或别名 |
 | ResourceId | string | 否 | UKMS 实例资源 ID |
 
 ---
@@ -173,7 +176,7 @@
 
 | 参数名 | 类型 | 必填 | 说明 |
 |:---|:---|:---|:---|
-| KeyId | string | **是** | 密钥资源长 ID、或别名 |
+| KeyId | string | **是** | 密钥资源长 ID、ARN 或别名 |
 | Plaintext | string | **是** | 待加密明文，Base64 编码 |
 | EncryptionContext | string | 否 | 加密上下文，JSON Object。该参数内容会记录在日志中，请勿传入敏感信息 |
 | ResourceId | string | 否 | UKMS 实例资源 ID |
@@ -185,13 +188,13 @@
 |:---|:---|:---|
 | CiphertextBlob | string | 加密后的密文 |
 | KeyId | string | 密钥资源长 ID |
-| EncryptionAlgorithm | string | 实际使用的加密算法 |
+| EncryptionAlgorithm | string | 实际使用的加密算法。取值：SYMMETRIC_DEFAULT、RSAES_OAEP_SHA_1、RSAES_OAEP_SHA_256 |
 
 ---
 
 ### Decrypt — 解密
 
-解密使用对称或非对称 UUKMS 密钥加密的密文。非对称密钥解密时须指定 KeyId 和 EncryptionAlgorithm。
+解密使用对称或非对称 KMS 密钥加密的密文。非对称密钥解密时须指定 KeyId 和 EncryptionAlgorithm。
 
 **请求参数**
 
@@ -199,8 +202,8 @@
 |:---|:---|:---|:---|
 | CiphertextBlob | string | **是** | 待解密密文 |
 | KeyId | string | 否 | 主密钥 KeyId；对称密钥可空（从 CiphertextBlob 自动识别），非对称必填 |
-| EncryptionContext | string | 否 | 加密上下文，JSON Object |
-| EncryptionAlgorithm | string | 否 | 解密算法。可选值：`SYMMETRIC_DEFAULT`、`RSAES_OAEP_SHA_1`、`RSAES_OAEP_SHA_256`。非对称密钥必填或使用默认 `RSAES_OAEP_SHA_256` |
+| EncryptionContext | string | 否 | 加密上下文，JSON Object。该参数内容会记录在日志中，请勿传入密码、密钥、令牌等敏感信息 |
+| EncryptionAlgorithm | string | 否 | 解密算法。可选值：`SYMMETRIC_DEFAULT`、`RSAES_OAEP_SHA_1`、`RSAES_OAEP_SHA_256`。非对称密钥解密时必填 |
 | ResourceId | string | 否 | UKMS 实例资源 ID |
 
 **响应字段**
@@ -209,7 +212,7 @@
 |:---|:---|:---|
 | Plaintext | string | 解密后的明文，Base64 编码 |
 | KeyId | string | 密钥资源长 ID |
-| EncryptionAlgorithm | string | 实际使用的解密算法 |
+| EncryptionAlgorithm | string | 实际使用的解密算法。取值：SYMMETRIC_DEFAULT、RSAES_OAEP_SHA_1、RSAES_OAEP_SHA_256 |
 
 ---
 
@@ -270,7 +273,7 @@
 
 | 参数名 | 类型 | 必填 | 说明 |
 |:---|:---|:---|:---|
-| KeyId | string | **是** | 密钥 ID |
+| KeyId | string | **是** | 密钥资源长 ID、ARN 或别名 |
 | KeyPairSpec | string | **是** | 密钥对类型 |
 | EncryptionContext | string | 否 | 加密上下文 |
 
@@ -294,7 +297,7 @@
 
 | 参数名 | 类型 | 必填 | 说明 |
 |:---|:---|:---|:---|
-| KeyId | string | **是** | 密钥 ID |
+| KeyId | string | **是** | 密钥资源长 ID、ARN 或别名 |
 | KeyPairSpec | string | **是** | 指定生成的数据密钥对类型 |
 | EncryptionContext | string | 否 | 指定加密私钥时使用的加密上下文 |
 
@@ -310,7 +313,7 @@
 
 | 参数名 | 类型 | 必填 | 说明 |
 |:---|:---|:---|:---|
-| KeyId | string | **是** | 密钥资源长 ID 或别名 |
+| KeyId | string | **是** | 密钥资源长 ID、ARN 或别名 |
 | SigningMessage | string | **是** | 待签名消息，Base64 编码，最大 4096 字节 |
 | SigningAlgorithm | string | **是** | 签名算法。可选值见下表。须与密钥 KeySpec 匹配 |
 | ResourceId | string | 否 | UKMS 实例资源 ID |
@@ -326,7 +329,7 @@
 |:---|:---|:---|
 | SignatureResult | string | 签名结果，Base64 编码 |
 | KeyId | string | 密钥资源长 ID |
-| SigningAlgorithm | string | 实际使用的签名算法 |
+| SigningAlgorithm | string | 实际使用的签名算法。取值：RSASSA_PSS_SHA_256、RSASSA_PSS_SHA_384、RSASSA_PSS_SHA_512、RSASSA_PKCS1_V1_5_SHA_256、RSASSA_PKCS1_V1_5_SHA_384、RSASSA_PKCS1_V1_5_SHA_512、ECDSA_SHA_256、ECDSA_SHA_384、ECDSA_SHA_512 |
 
 ---
 
@@ -338,10 +341,10 @@
 
 | 参数名 | 类型 | 必填 | 说明 |
 |:---|:---|:---|:---|
-| KeyId | string | **是** | 密钥 ID 或别名 |
+| KeyId | string | **是** | 密钥资源长 ID、ARN 或别名 |
 | SigningMessage | string | **是** | 待验签的消息或消息摘要，Base64 编码 |
 | SignatureResult | string | **是** | 待验证的签名，Base64 编码 |
-| SigningAlgorithm | string | **是** | 签名时使用的算法。须与密钥 KeySpec 匹配 |
+| SigningAlgorithm | string | **是** | 签名时使用的算法。可选值：RSASSA_PSS_SHA_256、RSASSA_PSS_SHA_384、RSASSA_PSS_SHA_512、RSASSA_PKCS1_V1_5_SHA_256、RSASSA_PKCS1_V1_5_SHA_384、RSASSA_PKCS1_V1_5_SHA_512、ECDSA_SHA_256、ECDSA_SHA_384、ECDSA_SHA_512；须与密钥 KeySpec 匹配 |
 | ResourceId | string | 否 | UKMS 实例资源 ID |
 | MessageType | string | 否 | 消息类型：`RAW`（默认）或 `DIGEST` |
 
@@ -350,8 +353,8 @@
 | 字段名 | 类型 | 说明 |
 |:---|:---|:---|
 | SignatureValid | boolean | 签名是否有效 |
-| KeyId | string | 密钥 ID |
-| SigningAlgorithm | string | 使用的签名算法 |
+| KeyId | string | 密钥资源长 ID |
+| SigningAlgorithm | string | 使用的签名算法。取值：RSASSA_PSS_SHA_256、RSASSA_PSS_SHA_384、RSASSA_PSS_SHA_512、RSASSA_PKCS1_V1_5_SHA_256、RSASSA_PKCS1_V1_5_SHA_384、RSASSA_PKCS1_V1_5_SHA_512、ECDSA_SHA_256、ECDSA_SHA_384、ECDSA_SHA_512 |
 
 > **注意**：验签失败时 `RetCode` 仍为 0，须通过 `SignatureValid` 字段判断结果。
 
@@ -367,7 +370,7 @@
 
 | 参数名 | 类型 | 必填 | 说明 |
 |:---|:---|:---|:---|
-| KeyId | string | **是** | 密钥 ID |
+| KeyId | string | **是** | 密钥资源长 ID、ARN 或别名 |
 | MacMessage | string | **是** | 待哈希的消息 |
 | MacAlgorithm | string | **是** | 用于生成消息认证码的 MAC 算法 |
 
@@ -388,7 +391,7 @@
 
 | 参数名 | 类型 | 必填 | 说明 |
 |:---|:---|:---|:---|
-| KeyId | string | **是** | 密钥 ID |
+| KeyId | string | **是** | 密钥资源长 ID、ARN 或别名 |
 | MacMessage | string | **是** | 用于验证的消息，须与生成 HMAC 时所用消息相同 |
 | Mac | string | **是** | 要验证的 HMAC |
 | MacAlgorithm | string | **是** | 验证过程中将使用的 MAC 算法，须与计算 HMAC 时相同 |
@@ -398,7 +401,7 @@
 | 字段名 | 类型 | 说明 |
 |:---|:---|:---|
 | MacValid | boolean | HMAC 是否已验证 |
-| KeyId | string | 密钥 ID |
+| KeyId | string | 密钥资源长 ID |
 | MacAlgorithm | string | 验证中使用的 MAC 算法 |
 
 ---
@@ -413,7 +416,7 @@
 
 | 参数名 | 类型 | 必填 | 说明 |
 |:---|:---|:---|:---|
-| KeyId | string | **是** | 密钥 ID 或别名 |
+| KeyId | string | **是** | 密钥 ID、ARN 或别名 |
 | ResourceId | string | **是** | UKMS 实例资源 ID |
 | RotationPeriodInDays | int | 否 | 轮转周期（天），取值范围 1~2560，默认 365 |
 
@@ -425,7 +428,7 @@
 
 | 参数名 | 类型 | 必填 | 说明 |
 |:---|:---|:---|:---|
-| KeyId | string | **是** | 密钥 ID 或别名 |
+| KeyId | string | **是** | 密钥资源长 ID、ARN 或别名 |
 | ResourceId | string | 否 | UKMS 实例资源 ID |
 
 ---
@@ -438,18 +441,19 @@
 
 | 参数名 | 类型 | 必填 | 说明 |
 |:---|:---|:---|:---|
-| KeyId | string | **是** | 密钥资源长 ID 或别名 |
+| KeyId | string | **是** | 密钥资源长 ID、ARN 或别名 |
 | ResourceId | string | 否 | UKMS 实例资源 ID |
 
 **响应字段**
 
 | 字段名 | 类型 | 说明 |
 |:---|:---|:---|
-| KeyRotationEnabled | boolean | 是否开启自动轮转 |
+| KeyRotationEnabled | boolean | 是否开启自动轮转。取值：true、false |
 | KeyId | string | 密钥资源长 ID |
-| RotationPeriodInDays | int | 轮转周期（天），未开启时返回 0 |
+| RotationPeriodInDays | int | 轮转周期（天）；未开启时返回 0 |
 | NextRotationDate | int | 下次轮转时间（Unix 时间戳） |
 | OnDemandRotationStartDate | int | 按需轮转开始时间（Unix 时间戳） |
+| LastRotationDate | int | 上次轮转时间（Unix 时间戳） |
 
 ---
 
@@ -459,7 +463,7 @@
 
 | 参数名 | 类型 | 必填 | 说明 |
 |:---|:---|:---|:---|
-| KeyId | string | **是** | 密钥 ID 或别名 |
+| KeyId | string | **是** | 密钥资源长 ID、ARN 或别名 |
 | ResourceId | string | 否 | UKMS 实例资源 ID |
 
 ---
@@ -473,7 +477,7 @@
 | 参数名 | 类型 | 必填 | 说明 |
 |:---|:---|:---|:---|
 | AliasName | string | **是** | 密钥别名，格式 `alias/name` |
-| KeyId | string | **是** | 密钥 ID 或别名 |
+| KeyId | string | **是** | 密钥资源长 ID、ARN 或别名 |
 | ResourceId | string | 否 | UKMS 实例资源 ID |
 
 ---
@@ -485,7 +489,7 @@
 | 参数名 | 类型 | 必填 | 说明 |
 |:---|:---|:---|:---|
 | AliasName | string | **是** | 密钥别名，格式 `alias/name` |
-| KeyId | string | **是** | 密钥 ID 或别名 |
+| KeyId | string | **是** | 密钥资源长 ID、ARN 或别名 |
 | ResourceId | string | 否 | UKMS 实例资源 ID |
 
 ---
@@ -538,19 +542,19 @@
 
 | 参数名 | 类型 | 必填 | 说明 |
 |:---|:---|:---|:---|
-| KeyId | string | **是** | 密钥 ID 或别名 |
+| KeyId | string | **是** | 密钥资源长 ID、ARN 或别名 |
 | ResourceId | string | 否 | UKMS 实例资源 ID |
 
 **响应字段**
 
 | 字段名 | 类型 | 说明 |
 |:---|:---|:---|
-| KeyId | string | 密钥 ID |
+| KeyId | string | 密钥资源长 ID |
 | KmsPublicKey | string | PEM 或 DER 编码的公钥 |
 | KeySpec | string | 密钥规格 |
-| KeyUsage | array[string] | 密钥用途 |
-| SigningAlgorithms | array[string] | 支持的签名算法列表 |
-| EncryptionAlgorithms | array[string] | 支持的加密算法列表 |
+| KeyUsage | array[string] | 密钥用途。取值：ENCRYPT_DECRYPT、SIGN_VERIFY、GENERATE_VERIFY_MAC、KEY_AGREEMENT |
+| SigningAlgorithms | array[string] | 支持的签名算法列表。取值：RSASSA_PSS_SHA_256、RSASSA_PSS_SHA_384、RSASSA_PSS_SHA_512、RSASSA_PKCS1_V1_5_SHA_256、RSASSA_PKCS1_V1_5_SHA_384、RSASSA_PKCS1_V1_5_SHA_512、ECDSA_SHA_256、ECDSA_SHA_384、ECDSA_SHA_512 |
+| EncryptionAlgorithms | array[string] | 支持的加密算法列表。取值：RSAES_OAEP_SHA_1、RSAES_OAEP_SHA_256 |
 
 ---
 
