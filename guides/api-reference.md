@@ -48,7 +48,7 @@
 
 | 参数名 | 类型 | 必填 | 说明 |
 |:---|:---|:---|:---|
-| KeyId | string | **是** | 密钥资源长 ID、ARN 或别名 |
+| KeyId | string | **是** | 密钥资源长 ID或别名 |
 | ResourceId | string | 否 | UKMS 实例资源 ID |
 
 **响应 — KeyMetadata 数据模型**
@@ -134,7 +134,7 @@
 
 | 参数名 | 类型 | 必填 | 说明 |
 |:---|:---|:---|:---|
-| KeyId | string | **是** | 密钥资源长 ID、ARN 或别名 |
+| KeyId | string | **是** | 密钥资源长 ID、或别名 |
 | Description | string | **是** | 新的密钥描述，最多 8192 字符；空字符串表示清空描述 |
 | ResourceId | string | 否 | UKMS 实例资源 ID |
 
@@ -173,7 +173,7 @@
 
 | 参数名 | 类型 | 必填 | 说明 |
 |:---|:---|:---|:---|
-| KeyId | string | **是** | 密钥资源长 ID、ARN 或别名 |
+| KeyId | string | **是** | 密钥资源长 ID、或别名 |
 | Plaintext | string | **是** | 待加密明文，Base64 编码 |
 | EncryptionContext | string | 否 | 加密上下文，JSON Object。该参数内容会记录在日志中，请勿传入敏感信息 |
 | ResourceId | string | 否 | UKMS 实例资源 ID |
@@ -223,7 +223,7 @@
 
 | 参数名 | 类型 | 必填 | 说明 |
 |:---|:---|:---|:---|
-| KeyId | string | **是** | 密钥资源长 ID、ARN 或别名 |
+| KeyId | string | **是** | 密钥资源长 ID或别名 |
 | ResourceId | string | 否 | UKMS 实例资源 ID |
 | KeySpec | string | 否 | 数据密钥规格。可选值：`AES_256`、`AES_128`，默认 `AES_256`。与 NumberOfBytes 二选一，同时填写时 NumberOfBytes 优先 |
 | NumberOfBytes | int | 否 | 生成数据密钥的字节长度，取值范围 1~1024。与 KeySpec 二选一，同时填写时本字段优先 |
@@ -247,7 +247,7 @@
 
 | 参数名 | 类型 | 必填 | 说明 |
 |:---|:---|:---|:---|
-| KeyId | string | **是** | 密钥资源长 ID、ARN 或别名 |
+| KeyId | string | **是** | 密钥资源长 ID 或别名 |
 | ResourceId | string | 否 | UKMS 实例资源 ID |
 | KeySpec | string | 否 | 数据密钥规格。可选值：`AES_256`、`AES_128`，默认 `AES_256` |
 | NumberOfBytes | int | 否 | 生成数据密钥的字节长度，取值范围 1~1024 |
@@ -310,7 +310,7 @@
 
 | 参数名 | 类型 | 必填 | 说明 |
 |:---|:---|:---|:---|
-| KeyId | string | **是** | 密钥资源长 ID、ARN 或别名 |
+| KeyId | string | **是** | 密钥资源长 ID 或别名 |
 | SigningMessage | string | **是** | 待签名消息，Base64 编码，最大 4096 字节 |
 | SigningAlgorithm | string | **是** | 签名算法。可选值见下表。须与密钥 KeySpec 匹配 |
 | ResourceId | string | 否 | UKMS 实例资源 ID |
@@ -338,7 +338,7 @@
 
 | 参数名 | 类型 | 必填 | 说明 |
 |:---|:---|:---|:---|
-| KeyId | string | **是** | 密钥 ID、ARN 或别名 |
+| KeyId | string | **是** | 密钥 ID 或别名 |
 | SigningMessage | string | **是** | 待验签的消息或消息摘要，Base64 编码 |
 | SignatureResult | string | **是** | 待验证的签名，Base64 编码 |
 | SigningAlgorithm | string | **是** | 签名时使用的算法。须与密钥 KeySpec 匹配 |
@@ -413,7 +413,7 @@
 
 | 参数名 | 类型 | 必填 | 说明 |
 |:---|:---|:---|:---|
-| KeyId | string | **是** | 密钥 ID、ARN 或别名 |
+| KeyId | string | **是** | 密钥 ID 或别名 |
 | ResourceId | string | **是** | UKMS 实例资源 ID |
 | RotationPeriodInDays | int | 否 | 轮转周期（天），取值范围 1~2560，默认 365 |
 
@@ -425,7 +425,7 @@
 
 | 参数名 | 类型 | 必填 | 说明 |
 |:---|:---|:---|:---|
-| KeyId | string | **是** | 密钥 ID、ARN 或别名 |
+| KeyId | string | **是** | 密钥 ID 或别名 |
 | ResourceId | string | 否 | UKMS 实例资源 ID |
 
 ---
@@ -438,7 +438,7 @@
 
 | 参数名 | 类型 | 必填 | 说明 |
 |:---|:---|:---|:---|
-| KeyId | string | **是** | 密钥资源长 ID、ARN 或别名 |
+| KeyId | string | **是** | 密钥资源长 ID 或别名 |
 | ResourceId | string | 否 | UKMS 实例资源 ID |
 
 **响应字段**
@@ -459,7 +459,7 @@
 
 | 参数名 | 类型 | 必填 | 说明 |
 |:---|:---|:---|:---|
-| KeyId | string | **是** | 密钥 ID、ARN 或别名 |
+| KeyId | string | **是** | 密钥 ID 或别名 |
 | ResourceId | string | 否 | UKMS 实例资源 ID |
 
 ---
@@ -473,7 +473,7 @@
 | 参数名 | 类型 | 必填 | 说明 |
 |:---|:---|:---|:---|
 | AliasName | string | **是** | 密钥别名，格式 `alias/name` |
-| KeyId | string | **是** | 密钥 ID、ARN 或别名 |
+| KeyId | string | **是** | 密钥 ID 或别名 |
 | ResourceId | string | 否 | UKMS 实例资源 ID |
 
 ---
@@ -485,7 +485,7 @@
 | 参数名 | 类型 | 必填 | 说明 |
 |:---|:---|:---|:---|
 | AliasName | string | **是** | 密钥别名，格式 `alias/name` |
-| KeyId | string | **是** | 密钥 ID、ARN 或别名 |
+| KeyId | string | **是** | 密钥 ID 或别名 |
 | ResourceId | string | 否 | UKMS 实例资源 ID |
 
 ---
@@ -538,7 +538,7 @@
 
 | 参数名 | 类型 | 必填 | 说明 |
 |:---|:---|:---|:---|
-| KeyId | string | **是** | 密钥 ID、ARN 或别名 |
+| KeyId | string | **是** | 密钥 ID 或别名 |
 | ResourceId | string | 否 | UKMS 实例资源 ID |
 
 **响应字段**
