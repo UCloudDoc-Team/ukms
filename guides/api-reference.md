@@ -117,7 +117,7 @@
 
 | 参数名 | 类型 | 必填 | 说明 |
 |:---|:---|:---|:---|
-| KeyId | string | **是** | 密钥资源长 ID、ARN 或别名 |
+| KeyId | string | **是** | 密钥资源长 ID |
 | ResourceId | string | 否 | UKMS 实例资源 ID |
 
 ---
@@ -128,7 +128,7 @@
 
 | 参数名 | 类型 | 必填 | 说明 |
 |:---|:---|:---|:---|
-| KeyId | string | **是** | 密钥资源长 ID、ARN 或别名 |
+| KeyId | string | **是** | 密钥资源长 ID |
 | ResourceId | string | 否 | UKMS 实例资源 ID |
 
 ---
@@ -137,7 +137,7 @@
 
 | 参数名 | 类型 | 必填 | 说明 |
 |:---|:---|:---|:---|
-| KeyId | string | **是** | 密钥资源长 ID、ARN 或别名 |
+| KeyId | string | **是** | 密钥资源长 ID 或别名 |
 | Description | string | **是** | 新的密钥描述，最多 8192 字符；空字符串表示清空描述 |
 | ResourceId | string | 否 | UKMS 实例资源 ID |
 
@@ -149,7 +149,7 @@
 
 | 参数名 | 类型 | 必填 | 说明 |
 |:---|:---|:---|:---|
-| KeyId | string | **是** | 密钥资源长 ID、ARN 或别名 |
+| KeyId | string | **是** | 密钥资源长 ID |
 | DeleteDay | int | 否 | 删除等待天数，取值范围 7~30 天，默认 30 天 |
 | ResourceId | string | 否 | UKMS 实例资源 ID |
 
@@ -161,7 +161,7 @@
 
 | 参数名 | 类型 | 必填 | 说明 |
 |:---|:---|:---|:---|
-| KeyId | string | **是** | 密钥资源长 ID、ARN 或别名 |
+| KeyId | string | **是** | 密钥资源长 ID |
 | ResourceId | string | 否 | UKMS 实例资源 ID |
 
 ---
@@ -176,7 +176,7 @@
 
 | 参数名 | 类型 | 必填 | 说明 |
 |:---|:---|:---|:---|
-| KeyId | string | **是** | 密钥资源长 ID、ARN 或别名 |
+| KeyId | string | **是** | 密钥资源长 ID 或别名 |
 | Plaintext | string | **是** | 待加密明文，Base64 编码 |
 | EncryptionContext | string | 否 | 加密上下文，JSON Object。该参数内容会记录在日志中，请勿传入敏感信息 |
 | ResourceId | string | 否 | UKMS 实例资源 ID |
@@ -250,7 +250,7 @@
 
 | 参数名 | 类型 | 必填 | 说明 |
 |:---|:---|:---|:---|
-| KeyId | string | **是** | 密钥资源长 ID、ARN 或别名 |
+| KeyId | string | **是** | 密钥资源长 ID 别名 |
 | ResourceId | string | 否 | UKMS 实例资源 ID |
 | KeySpec | string | 否 | 数据密钥规格。可选值：`AES_256`、`AES_128`，默认 `AES_256` |
 | NumberOfBytes | int | 否 | 生成数据密钥的字节长度，取值范围 1~1024 |
@@ -273,7 +273,7 @@
 
 | 参数名 | 类型 | 必填 | 说明 |
 |:---|:---|:---|:---|
-| KeyId | string | **是** | 密钥资源长 ID、ARN 或别名 |
+| KeyId | string | **是** | 密钥资源长 ID 或别名 |
 | KeyPairSpec | string | **是** | 密钥对类型 |
 | EncryptionContext | string | 否 | 加密上下文 |
 
@@ -297,7 +297,7 @@
 
 | 参数名 | 类型 | 必填 | 说明 |
 |:---|:---|:---|:---|
-| KeyId | string | **是** | 密钥资源长 ID、ARN 或别名 |
+| KeyId | string | **是** | 密钥资源长 ID 或别名 |
 | KeyPairSpec | string | **是** | 指定生成的数据密钥对类型 |
 | EncryptionContext | string | 否 | 指定加密私钥时使用的加密上下文 |
 
@@ -313,7 +313,7 @@
 
 | 参数名 | 类型 | 必填 | 说明 |
 |:---|:---|:---|:---|
-| KeyId | string | **是** | 密钥资源长 ID、ARN 或别名 |
+| KeyId | string | **是** | 密钥资源长 ID 或别名 |
 | SigningMessage | string | **是** | 待签名消息，Base64 编码，最大 4096 字节 |
 | SigningAlgorithm | string | **是** | 签名算法。可选值见下表。须与密钥 KeySpec 匹配 |
 | ResourceId | string | 否 | UKMS 实例资源 ID |
@@ -341,7 +341,7 @@
 
 | 参数名 | 类型 | 必填 | 说明 |
 |:---|:---|:---|:---|
-| KeyId | string | **是** | 密钥资源长 ID、ARN 或别名 |
+| KeyId | string | **是** | 密钥资源长 ID 或别名 |
 | SigningMessage | string | **是** | 待验签的消息或消息摘要，Base64 编码 |
 | SignatureResult | string | **是** | 待验证的签名，Base64 编码 |
 | SigningAlgorithm | string | **是** | 签名时使用的算法。可选值：RSASSA_PSS_SHA_256、RSASSA_PSS_SHA_384、RSASSA_PSS_SHA_512、RSASSA_PKCS1_V1_5_SHA_256、RSASSA_PKCS1_V1_5_SHA_384、RSASSA_PKCS1_V1_5_SHA_512、ECDSA_SHA_256、ECDSA_SHA_384、ECDSA_SHA_512；须与密钥 KeySpec 匹配 |
@@ -370,7 +370,7 @@
 
 | 参数名 | 类型 | 必填 | 说明 |
 |:---|:---|:---|:---|
-| KeyId | string | **是** | 密钥资源长 ID、ARN 或别名 |
+| KeyId | string | **是** | 密钥资源长 ID 或别名 |
 | MacMessage | string | **是** | 待哈希的消息 |
 | MacAlgorithm | string | **是** | 用于生成消息认证码的 MAC 算法 |
 
@@ -391,7 +391,7 @@
 
 | 参数名 | 类型 | 必填 | 说明 |
 |:---|:---|:---|:---|
-| KeyId | string | **是** | 密钥资源长 ID、ARN 或别名 |
+| KeyId | string | **是** | 密钥资源长 ID 或别名 |
 | MacMessage | string | **是** | 用于验证的消息，须与生成 HMAC 时所用消息相同 |
 | Mac | string | **是** | 要验证的 HMAC |
 | MacAlgorithm | string | **是** | 验证过程中将使用的 MAC 算法，须与计算 HMAC 时相同 |
@@ -416,7 +416,7 @@
 
 | 参数名 | 类型 | 必填 | 说明 |
 |:---|:---|:---|:---|
-| KeyId | string | **是** | 密钥 ID、ARN 或别名 |
+| KeyId | string | **是** | 密钥 ID 或别名 |
 | ResourceId | string | **是** | UKMS 实例资源 ID |
 | RotationPeriodInDays | int | 否 | 轮转周期（天），取值范围 1~2560，默认 365 |
 
@@ -428,7 +428,7 @@
 
 | 参数名 | 类型 | 必填 | 说明 |
 |:---|:---|:---|:---|
-| KeyId | string | **是** | 密钥资源长 ID、ARN 或别名 |
+| KeyId | string | **是** | 密钥资源长 ID 或别名 |
 | ResourceId | string | 否 | UKMS 实例资源 ID |
 
 ---
@@ -441,7 +441,7 @@
 
 | 参数名 | 类型 | 必填 | 说明 |
 |:---|:---|:---|:---|
-| KeyId | string | **是** | 密钥资源长 ID、ARN 或别名 |
+| KeyId | string | **是** | 密钥资源长 ID 或别名 |
 | ResourceId | string | 否 | UKMS 实例资源 ID |
 
 **响应字段**
@@ -463,7 +463,7 @@
 
 | 参数名 | 类型 | 必填 | 说明 |
 |:---|:---|:---|:---|
-| KeyId | string | **是** | 密钥资源长 ID、ARN 或别名 |
+| KeyId | string | **是** | 密钥资源长 ID 或别名 |
 | ResourceId | string | 否 | UKMS 实例资源 ID |
 
 ---
@@ -477,7 +477,7 @@
 | 参数名 | 类型 | 必填 | 说明 |
 |:---|:---|:---|:---|
 | AliasName | string | **是** | 密钥别名，格式 `alias/name` |
-| KeyId | string | **是** | 密钥资源长 ID、ARN 或别名 |
+| KeyId | string | **是** | 密钥资源长 ID 或别名 |
 | ResourceId | string | 否 | UKMS 实例资源 ID |
 
 ---
@@ -489,7 +489,7 @@
 | 参数名 | 类型 | 必填 | 说明 |
 |:---|:---|:---|:---|
 | AliasName | string | **是** | 密钥别名，格式 `alias/name` |
-| KeyId | string | **是** | 密钥资源长 ID、ARN 或别名 |
+| KeyId | string | **是** | 密钥资源长 ID 或别名 |
 | ResourceId | string | 否 | UKMS 实例资源 ID |
 
 ---
@@ -542,7 +542,7 @@
 
 | 参数名 | 类型 | 必填 | 说明 |
 |:---|:---|:---|:---|
-| KeyId | string | **是** | 密钥资源长 ID、ARN 或别名 |
+| KeyId | string | **是** | 密钥资源长 ID 或别名 |
 | ResourceId | string | 否 | UKMS 实例资源 ID |
 
 **响应字段**
