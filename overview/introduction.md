@@ -74,6 +74,6 @@ UKMS 由以下组件构成：
 
 ## 下一步
 
-- 查看 [快速入门](../guides/quickstart.md) 开始使用 UKMS
-- 了解 [基本概念](concepts.md) 熟悉密钥管理术语
-- 查看 [产品优势](features.md) 了解 UKMS 的核心竞争力
+- 查看 [快速入门](/ukms/guides/quickstart.md) 开始使用 UKMS
+- 了解 [基本概念](/ukms/overviw/concepts.md) 熟悉密钥管理术语
+- 查看 [产品优势](/ukms/overviw/features.md) 了解 UKMS 的核心竞争力
